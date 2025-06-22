@@ -90,40 +90,6 @@ combo_r_repeat { \
     layers = <COMBO_LAYERS>; \
 };
 
-/ {
-    behaviors {
-        fnkey0: fnkey0 {
-            compatible = "zmk,behavior-leader-key";
-            #binding-cells = <0>;
-            f1 { sequence = <N1>; bindings = <&kp F1>; };
-            f2 { sequence = <N2>; bindings = <&kp F2>; };
-            f3 { sequence = <N3>; bindings = <&kp F3>; };
-            f4 { sequence = <N4>; bindings = <&kp F4>; };
-            f5 { sequence = <N5>; bindings = <&kp F5>; };
-            f6 { sequence = <N6>; bindings = <&kp F6>; };
-            f7 { sequence = <N7>; bindings = <&kp F7>; };
-            f8 { sequence = <N8>; bindings = <&kp F8>; };
-            f9 { sequence = <N9>; bindings = <&kp F9>; };
-            f10 { sequence = <N0>; bindings = <&kp F10>; };
-        };
-
-        fnkey1: fnkey1 {
-            compatible = "zmk,behavior-leader-key";
-            #binding-cells = <0>;
-            f11 { sequence = <N1>; bindings = <&kp F11>; };
-            f12 { sequence = <N2>; bindings = <&kp F12>; };
-            f13 { sequence = <N3>; bindings = <&kp F13>; };
-            f14 { sequence = <N4>; bindings = <&kp F14>; };
-            f15 { sequence = <N5>; bindings = <&kp F15>; };
-            f16 { sequence = <N6>; bindings = <&kp F16>; };
-            f17 { sequence = <N7>; bindings = <&kp F17>; };
-            f18 { sequence = <N8>; bindings = <&kp F18>; };
-            f19 { sequence = <N9>; bindings = <&kp F19>; };
-            f20 { sequence = <N0>; bindings = <&kp F20>; };
-        };
-    };
-};
-
 TCOMBO(R,      &kp R,      &kp LS(R), &kp GT,     &kp PSCRN,    TLP,         TRP)
 TCOMBO(S,      &kp S,      &kp LS(S), &kp RBRC,   &kp C_BRI_UP, TLR,         TRR)
 TCOMBO(N,      &kp N,      &kp LS(N), &kp RBKT,   &kp C_BRI_DN, TLM,         TRM)

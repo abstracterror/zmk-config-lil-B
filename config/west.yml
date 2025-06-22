@@ -4,6 +4,8 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: kilipan
       url-base: https://github.com/kilipan
+    - name: urob
+      url-base: https://github.com/urob
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -12,5 +14,8 @@ manifest:
     - name: zmk-keyboards-lil-B
       remote: kilipan
       revision: main
+    - name: zmk-leader-key
+      remote: urob
+      revision: v0.2.1
   self:
     path: config

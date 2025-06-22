@@ -6,7 +6,7 @@
 // CONFIG
 #define COMBO_TIMEOUT 70
 #define COMBO_LAYERS 0
-#define STICKY_TIMEOUT 500
+#define STICKY_TIMEOUT 1000
 
 //  ________________________________________________
 // |   0 |   1 |   2 |   3 ||   4 |   5 |   6 |   7 |
@@ -41,6 +41,7 @@
 &sk {
     release-after-ms = <STICKY_TIMEOUT>;
     quick-release;
+    /delete-property/ ignore-modifiers;
 };
 
 /{

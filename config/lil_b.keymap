@@ -5,8 +5,11 @@
 
 // CONFIG
 #define COMBO_TIMEOUT 70
-#define COMBO_LAYERS 0
 #define STICKY_TIMEOUT 1000
+
+// LAYERS
+#define US 0
+#define UK 1
 
 //  ________________________________________________
 // |   0 |   1 |   2 |   3 ||   4 |   5 |   6 |   7 |
@@ -38,25 +41,25 @@
 #define ROT 18 // O-THUMB
 #define RIT 19 // I-THUMB
 
-&sk {
-    release-after-ms = <STICKY_TIMEOUT>;
-    /delete-property/ ignore-modifiers;
-};
+#include "taipo.dtsi"
 
 /{
-    combos {
-        compatible = "zmk,combos";
-        #include "taipo.dtsi"
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-                &none &none &none &none &none &none &none &none
-                &none &none &none &none &none &none &none &none
-                            &none &none &none &none
+                &kp R  &kp S  &kp N  &kp I  &kp I  &kp N  &kp S  &kp R
+                &kp A  &kp O  &kp T  &kp E  &kp E  &kp T  &kp O  &kp A
+                        &kp BSPC &kp SPACE  &kp SPACE &kp BSPC
+            >;
+        };
+
+        uk_layer {
+            bindings = <
+                &trans &trans &trans &trans &trans &trans &trans &trans
+                &trans &trans &trans &trans &trans &trans &trans &trans
+                              &trans &trans &trans &trans
             >;
         };
     };

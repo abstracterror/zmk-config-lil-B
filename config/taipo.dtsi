@@ -1,132 +1,179 @@
-#define TCOMBO(NAME, BINDINGS, OUTER_BINDINGS, INNER_BINDINGS, BOTH_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS) \
+#define COMBO_1000(NAME, BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
 combo_l_##NAME { \
 	timeout-ms = <COMBO_TIMEOUT>; \
 	bindings = <BINDINGS>; \
 	key-positions = <LEFT_KEYPOS>; \
-	layers = <COMBO_LAYERS>; \
-}; \
-combo_li_##NAME { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <INNER_BINDINGS>; \
-	key-positions = <LEFT_KEYPOS LIT>; \
-	layers = <COMBO_LAYERS>; \
-}; \
-combo_lo_##NAME { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <OUTER_BINDINGS>; \
-	key-positions = <LEFT_KEYPOS LOT>; \
-	layers = <COMBO_LAYERS>; \
-}; \
-combo_lb_##NAME { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <BOTH_BINDINGS>; \
-	key-positions = <LEFT_KEYPOS LIT LOT>; \
-	layers = <COMBO_LAYERS>; \
+	layers = <LAYERS>; \
 }; \
 combo_r_##NAME { \
 	timeout-ms = <COMBO_TIMEOUT>; \
 	bindings = <BINDINGS>; \
 	key-positions = <RIGHT_KEYPOS>; \
-	layers = <COMBO_LAYERS>; \
-}; \
-combo_ri_##NAME { \
+	layers = <LAYERS>; \
+};
+
+#define COMBO_0100(NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+combo_lo_##NAME { \
 	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <INNER_BINDINGS>; \
-	key-positions = <RIGHT_KEYPOS RIT>; \
-	layers = <COMBO_LAYERS>; \
+	bindings = <OUTER_BINDINGS>; \
+	key-positions = <LEFT_KEYPOS LOT>; \
+	layers = <LAYERS>; \
 }; \
 combo_ro_##NAME { \
 	timeout-ms = <COMBO_TIMEOUT>; \
 	bindings = <OUTER_BINDINGS>; \
 	key-positions = <RIGHT_KEYPOS ROT>; \
-	layers = <COMBO_LAYERS>; \
+	layers = <LAYERS>; \
+};
+
+#define COMBO_0010(NAME, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+combo_li_##NAME { \
+	timeout-ms = <COMBO_TIMEOUT>; \
+	bindings = <INNER_BINDINGS>; \
+	key-positions = <LEFT_KEYPOS LIT>; \
+	layers = <LAYERS>; \
+}; \
+combo_ri_##NAME { \
+	timeout-ms = <COMBO_TIMEOUT>; \
+	bindings = <INNER_BINDINGS>; \
+	key-positions = <RIGHT_KEYPOS RIT>; \
+	layers = <LAYERS>; \
+};
+
+#define COMBO_0001(NAME, BOTH_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+combo_lb_##NAME { \
+	timeout-ms = <COMBO_TIMEOUT>; \
+	bindings = <BOTH_BINDINGS>; \
+	key-positions = <LEFT_KEYPOS LIT LOT>; \
+	layers = <LAYERS>; \
 }; \
 combo_rb_##NAME { \
 	timeout-ms = <COMBO_TIMEOUT>; \
 	bindings = <BOTH_BINDINGS>; \
 	key-positions = <RIGHT_KEYPOS RIT ROT>; \
-	layers = <COMBO_LAYERS>; \
+	layers = <LAYERS>; \
 };
 
-combo_l_space { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <&kp SPACE>; \
-	key-positions = <LOT>; \
-	layers = <COMBO_LAYERS>; \
+#define COMBO_0110(NAME, OUTER_BINDINGS, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0100(_##NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0010(_##NAME, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+#define COMBO_0111(NAME, OUTER_BINDINGS, INNER_BINDINGS, BOTH_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0100(_##NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0010(_##NAME, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0001(_##NAME, BOTH_BINDINGS,  LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+#define COMBO_1010(NAME, BINDINGS, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_1000(_##NAME, BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0010(_##NAME, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+#define COMBO_1100(NAME, BINDINGS, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_1000(_##NAME, BINDINGS,       LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0100(_##NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+#define COMBO_1101(NAME, BINDINGS, OUTER_BINDINGS, BOTH_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_1000(_##NAME, BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0100(_##NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0001(_##NAME, BOTH_BINDINGS,  LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+#define COMBO_1110(NAME, BINDINGS, OUTER_BINDINGS, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_1000(_##NAME, BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0100(_##NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0010(_##NAME, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+#define COMBO_1111(NAME, BINDINGS, OUTER_BINDINGS, INNER_BINDINGS, BOTH_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_1000(_##NAME, BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0100(_##NAME, OUTER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0010(_##NAME, INNER_BINDINGS, LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS) \
+COMBO_0001(_##NAME, BOTH_BINDINGS,  LEFT_KEYPOS, RIGHT_KEYPOS, LAYERS)
+
+&sk {
+    release-after-ms = <STICKY_TIMEOUT>;
+    /delete-property/ ignore-modifiers;
 };
 
-combo_r_space { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <&kp SPACE>; \
-	key-positions = <ROT>; \
-	layers = <COMBO_LAYERS>; \
-};
+/{
+    macros {
+        btsl: bt_select_layer {
+            compatible = "zmk,behavior-macro-two-param";
+            #binding-cells = <2>;
+            bindings
+                = <&macro_param_1to2>
+                , <&bt BT_SEL MACRO_PLACEHOLDER>
+                , <&macro_param_2to1>
+                , <&to MACRO_PLACEHOLDER>
+                ;
+        };
+    };
 
-combo_l_bspc { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <&kp BSPC>; \
-	key-positions = <LIT>; \
-	layers = <COMBO_LAYERS>; \
-};
+    combos {
+        compatible = "zmk,combos";
 
-combo_r_bspc { \
-	timeout-ms = <COMBO_TIMEOUT>; \
-	bindings = <&kp BSPC>; \
-	key-positions = <RIT>; \
-	layers = <COMBO_LAYERS>; \
-};
+        combo_off {
+            timeout-ms = <COMBO_TIMEOUT>;
+            bindings = <&soft_off>;
+            key-positions = <TLP TLR TRR TRP>;
+        };
 
-combo_l_repeat { \
-    timeout-ms = <COMBO_TIMEOUT>; \
-    bindings = <&key_repeat>; \
-    key-positions = <LIT LOT>; \
-    layers = <COMBO_LAYERS>; \
-};
+        combo_l_repeat {
+            timeout-ms = <COMBO_TIMEOUT>;
+            bindings = <&key_repeat>;
+            key-positions = <LIT LOT>;
+        };
 
-combo_r_repeat { \
-    timeout-ms = <COMBO_TIMEOUT>; \
-    bindings = <&key_repeat>; \
-    key-positions = <RIT ROT>; \
-    layers = <COMBO_LAYERS>; \
-};
+        combo_r_repeat {
+            timeout-ms = <COMBO_TIMEOUT>;
+            bindings = <&key_repeat>;
+            key-positions = <RIT ROT>;
+        };
 
-TCOMBO(R,      &kp R,      &kp LS(R), &kp GT,     &kp PSCRN,    TLP,         TRP)
-TCOMBO(S,      &kp S,      &kp LS(S), &kp RBRC,   &kp C_BRI_UP, TLR,         TRR)
-TCOMBO(N,      &kp N,      &kp LS(N), &kp RBKT,   &kp C_BRI_DN, TLM,         TRM)
-TCOMBO(I,      &kp I,      &kp LS(I), &kp RPAR,   &kp C_PP,     TLI,         TRI)
-TCOMBO(A,      &kp A,      &kp LS(A), &kp LT,     &kp C_NEXT,   BLP,         BRP)
-TCOMBO(O,      &kp O,      &kp LS(O), &kp LBRC,   &kp C_VOL_UP, BLR,         BRR)
-TCOMBO(T,      &kp T,      &kp LS(T), &kp LBKT,   &kp C_VOL_DN, BLM,         BRM)
-TCOMBO(E,      &kp E,      &kp LS(E), &kp LPAR,   &kp C_PREV,   BLI,         BRI)
-TCOMBO(C,      &kp C,      &kp LS(C), &kp N1,     &kp F1,       BLR BLI,     BRR BRI)
-TCOMBO(U,      &kp U,      &kp LS(U), &kp N2,     &kp F2,       BLR BLM,     BRR BRM)
-TCOMBO(Q,      &kp Q,      &kp LS(Q), &kp N3,     &kp F3,       BLP BLM,     BRP BRM)
-TCOMBO(L,      &kp L,      &kp LS(L), &kp N4,     &kp F4,       BLP BLR,     BRP BRR)
-TCOMBO(Y,      &kp Y,      &kp LS(Y), &kp N5,     &kp F5,       TLM TLI,     TRM TRI)
-TCOMBO(F,      &kp F,      &kp LS(F), &kp N6,     &kp F6,       TLR TLI,     TRR TRI)
-TCOMBO(P,      &kp P,      &kp LS(P), &kp N7,     &kp F7,       TLR TLM,     TRR TRM)
-TCOMBO(Z,      &kp Z,      &kp LS(Z), &kp N8,     &kp F8,       TLP TLM,     TRP TRM)
-TCOMBO(B,      &kp B,      &kp LS(B), &kp N9,     &kp F9,       TLP TLR,     TRP TRR)
-TCOMBO(H,      &kp H,      &kp LS(H), &kp N0,     &kp F10,      BLM BLI,     BRM BRI)
-TCOMBO(D,      &kp D,      &kp LS(D), &kp AT,     &kp F11,      BLP BLI,     BRP BRI)
-TCOMBO(G,      &kp G,      &kp LS(G), &kp HASH,   &kp F12,      TLP TLI,     TRP TRI)
-TCOMBO(X,      &kp X,      &kp LS(X), &kp CARET,  &kp LC(X),    TLP BLM,     TRP BRM)
-TCOMBO(K,      &kp K,      &kp LS(K), &kp PLUS,   &kp LC(C),    TLI BLR,     TRI BRR)
-TCOMBO(V,      &kp V,      &kp LS(V), &kp STAR,   &kp LC(V),    TLR BLI,     TRR BRI)
-TCOMBO(J,      &kp J,      &kp LS(J), &kp EQUAL,  &kp LC(Z),    TLM BLP,     TRM BRP)
-TCOMBO(M,      &kp M,      &kp LS(M), &kp DOLLAR, &none,        TLP BLI,     TRP BRI)
-TCOMBO(W,      &kp W,      &kp LS(W), &kp AMPS,   &none,        TLI BLP,     TRI BRP)
-TCOMBO(SLASH,  &kp SLASH,  &kp BSLH,  &kp PIPE,   &none,        TLR BLM,     TRR BRM)
-TCOMBO(MINUS,  &kp MINUS,  &kp UNDER, &kp PRCNT,  &none,        TLM BLR,     TRM BRR)
-TCOMBO(QMARK,  &kp QMARK,  &kp EXCL,  &caps_word, &none,        TLI BLM,     TRI BRM)
-TCOMBO(COMMA,  &kp COMMA,  &kp DOT,   &kp TILDE,  &none,        TLM BLI,     TRM BRI)
-TCOMBO(SEMI,   &kp SEMI,   &kp COLON, &none,      &none,        TLP BLR,     TRP BRR)
-TCOMBO(SEMI2,  &kp SEMI,   &kp COLON, &none,      &none,        BLR TLM BLI, BRR TRM BRI)
-TCOMBO(SQT,    &kp SQT,    &kp DQT,   &kp GRAVE,  &none,        TLR BLP,     TRR BRP)
-TCOMBO(SQT2,   &kp SQT,    &kp DQT,   &kp GRAVE,  &none,        BLR TLM TLI, BRR TRM TRI)
-TCOMBO(TAB,    &kp TAB,    &kp DEL,   &kp INS,    &bt BT_CLR,   TLR TLM TLI, TRR TRM TRI)
-TCOMBO(ENTER,  &kp ENTER,  &kp ESC,   &kp LALT,   &bootloader,  BLR BLM BLI, BRR BRM BRI)
-TCOMBO(LGUI,   &sk LGUI,   &kp RIGHT, &kp PGUP,   &bt BT_SEL 3, TLP BLP,     TRP BRP)
-TCOMBO(LALT,   &sk LALT,   &kp UP,    &kp HOME,   &bt BT_SEL 2, TLR BLR,     TRR BRR)
-TCOMBO(LCTRL,  &sk LCTRL,  &kp DOWN,  &kp END,    &bt BT_SEL 1, TLM BLM,     TRM BRM)
-TCOMBO(LSHIFT, &sk LSHIFT, &kp LEFT,  &kp PGDN,   &bt BT_SEL 0, TLI BLI,     TRI BRI)
+        COMBO_0111(R,                    &kp LS(R),  &kp GT,       &kp PSCRN,    TLP,         TRP,         US UK)
+        COMBO_0111(S,                    &kp LS(S),  &kp RBRC,     &kp C_BRI_UP, TLR,         TRR,         US UK)
+        COMBO_0111(N,                    &kp LS(N),  &kp RBKT,     &kp C_BRI_DN, TLM,         TRM,         US UK)
+        COMBO_0111(I,                    &kp LS(I),  &kp RPAR,     &kp C_PP,     TLI,         TRI,         US UK)
+        COMBO_0111(A,                    &kp LS(A),  &kp LT,       &kp C_NEXT,   BLP,         BRP,         US UK)
+        COMBO_0111(O,                    &kp LS(O),  &kp LBRC,     &kp C_VOL_UP, BLR,         BRR,         US UK)
+        COMBO_0111(T,                    &kp LS(T),  &kp LBKT,     &kp C_VOL_DN, BLM,         BRM,         US UK)
+        COMBO_0111(E,                    &kp LS(E),  &kp LPAR,     &kp C_PREV,   BLI,         BRI,         US UK)
+        COMBO_1111(C,        &kp C,      &kp LS(C),  &kp N1,       &kp F1,       BLR BLI,     BRR BRI,     US UK)
+        COMBO_1111(U,        &kp U,      &kp LS(U),  &kp N2,       &kp F2,       BLR BLM,     BRR BRM,     US UK)
+        COMBO_1111(Q,        &kp Q,      &kp LS(Q),  &kp N3,       &kp F3,       BLP BLM,     BRP BRM,     US UK)
+        COMBO_1111(L,        &kp L,      &kp LS(L),  &kp N4,       &kp F4,       BLP BLR,     BRP BRR,     US UK)
+        COMBO_1111(Y,        &kp Y,      &kp LS(Y),  &kp N5,       &kp F5,       TLM TLI,     TRM TRI,     US UK)
+        COMBO_1111(F,        &kp F,      &kp LS(F),  &kp N6,       &kp F6,       TLR TLI,     TRR TRI,     US UK)
+        COMBO_1111(P,        &kp P,      &kp LS(P),  &kp N7,       &kp F7,       TLR TLM,     TRR TRM,     US UK)
+        COMBO_1111(Z,        &kp Z,      &kp LS(Z),  &kp N8,       &kp F8,       TLP TLM,     TRP TRM,     US UK)
+        COMBO_1111(B,        &kp B,      &kp LS(B),  &kp N9,       &kp F9,       TLP TLR,     TRP TRR,     US UK)
+        COMBO_1111(H,        &kp H,      &kp LS(H),  &kp N0,       &kp F10,      BLM BLI,     BRM BRI,     US UK)
+        COMBO_1101(D,        &kp D,      &kp LS(D),                &kp F11,      BLP BLI,     BRP BRI,     US UK)
+        COMBO_0010(AT_US,                            &kp AT,                     BLP BLI,     BRP BRI,     US)
+        COMBO_0010(AT_UK,                            &kp LS(SQT),                BLP BLI,     BRP BRI,     UK)
+        COMBO_1101(G,        &kp G,      &kp LS(G),                &kp F12,      TLP TLI,     TRP TRI,     US UK)
+        COMBO_0010(HASH_US,                          &kp HASH,                   TLP TLI,     TRP TRI,     US)
+        COMBO_0010(HASH_UK,                          &kp NUHS,                   TLP TLI,     TRP TRI,     UK)
+        COMBO_1111(X,        &kp X,      &kp LS(X),  &kp CARET,    &kp LC(X),    TLP BLM,     TRP BRM,     US UK)
+        COMBO_1111(K,        &kp K,      &kp LS(K),  &kp PLUS,     &kp LC(C),    TLI BLR,     TRI BRR,     US UK)
+        COMBO_1111(V,        &kp V,      &kp LS(V),  &kp STAR,     &kp LC(V),    TLR BLI,     TRR BRI,     US UK)
+        COMBO_1111(J,        &kp J,      &kp LS(J),  &kp EQUAL,    &kp LC(Z),    TLM BLP,     TRM BRP,     US UK)
+        COMBO_1110(M,        &kp M,      &kp LS(M),  &kp DOLLAR,                 TLP BLI,     TRP BRI,     US UK)
+        COMBO_1110(W,        &kp W,      &kp LS(W),  &kp AMPS,                   TLI BLP,     TRI BRP,     US UK)
+        COMBO_1000(SLASH,    &kp SLASH,                                          TLR BLM,     TRR BRM,     US UK)
+        COMBO_0110(BSLH_US,              &kp BSLH,   &kp PIPE,                   TLR BLM,     TRR BRM,     US)
+        COMBO_0110(BSLH_UK,              &kp NUBS,   &kp LS(NUBS),               TLR BLM,     TRR BRM,     UK)
+        COMBO_1110(MINUS,    &kp MINUS,  &kp UNDER,  &kp PRCNT,                  TLM BLR,     TRM BRR,     US UK)
+        COMBO_1110(QMARK,    &kp QMARK,  &kp EXCL,   &caps_word,                 TLI BLM,     TRI BRM,     US UK)
+        COMBO_1100(COMMA,    &kp COMMA,  &kp DOT,                                TLM BLI,     TRM BRI,     US UK)
+        COMBO_0010(TILDE_US,                         &kp TILDE,                  TLM BLI,     TRM BRI,     US)
+        COMBO_0010(TILDE_UK,                         &kp LS(NUHS),               TLM BLI,     TRM BRI,     UK)
+        COMBO_1100(SEMI,     &kp SEMI,   &kp COLON,                              BLR TLM BLI, BRR TRM BRI, US UK)
+        COMBO_1010(SQT,      &kp SQT,                &kp GRAVE,                  TLR BLP,     TRR BRP,     US UK)
+        COMBO_0100(DQT_US,               &kp DQT,                                TLR BLP,     TRR BRP,     US)
+        COMBO_0100(DQT_UK,               &kp LS(N2),                             TLR BLP,     TRR BRP,     UK)
+        COMBO_1111(TAB,      &kp TAB,    &kp DEL,    &kp INS,      &bt BT_CLR,   TLR TLM TLI, TRR TRM TRI, US UK)
+        COMBO_1111(ENTER,    &kp ENTER,  &kp ESC,    &kp LALT,     &bootloader,  BLR BLM BLI, BRR BRM BRI, US UK)
+        COMBO_1111(LGUI,     &sk LGUI,   &kp RIGHT,  &kp PGUP,     &btsl 3 UK,   TLP BLP,     TRP BRP,     US UK)
+        COMBO_1111(LALT,     &sk LALT,   &kp UP,     &kp HOME,     &btsl 2 US,   TLR BLR,     TRR BRR,     US UK)
+        COMBO_1111(LCTRL,    &sk LCTRL,  &kp DOWN,   &kp END,      &btsl 1 UK,   TLM BLM,     TRM BRM,     US UK)
+        COMBO_1111(LSHIFT,   &sk LSHIFT, &kp LEFT,   &kp PGDN,     &btsl 0 US,   TLI BLI,     TRI BRI,     US UK)
+    };
+};
